@@ -4,13 +4,23 @@ This is a very simple CLI tool to help with learning Japanese kanji and vocabula
 
 ![demo.gif](docs/demo.gif)
 
-## What It Does
+## Features
+
+### Vocabulary mining
 
 The tool allows for searching of either specific kanji or words.
 - When a word is searched, it will look up the word on Jisho, display its details, and allow you to add it to your Anki vocabulary deck.
 - When a kanji is searched, it will first look up the Kanji on Jisho, then fetch a list of vocabulary words that include that kanji, with details including JLPT level, whether the word already exists in your Anki deck and whether the other kanji in the word are already in your list of reviewed kanji. You can then select which words to add to your Anki vocabulary deck.
 
 The workflow is designed to complement kanji study: as you learn new kanji, you naturally build vocabulary that reinforces those characters.
+
+### Adaptive furigana
+
+### Article reader
+
+### LLM enrichment
+
+### Progress dashboard
 
 ## Who is it for?
 Originally just me!
