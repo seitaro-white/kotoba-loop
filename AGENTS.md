@@ -1,6 +1,6 @@
 # AGENTS.md
 
-This document gives every agent working inside `kanji-vocab-builder` the shared context needed to stay productive and consistent. Its scope is the entire repository unless another nested `AGENTS.md` is introduced later. Re-read this file before changing code in this repo.
+This document gives every agent working inside `kotoba-loop` the shared context needed to stay productive and consistent. Its scope is the entire repository unless another nested `AGENTS.md` is introduced later. Re-read this file before changing code in this repo.
 
 ---
 
@@ -46,7 +46,7 @@ These are the canonical commands. Prefer the most specific scope possible (file 
 | Single test file | `uv run pytest tests/test_card_processor.py` | Replace path with the target module.
 | Single test function | `uv run pytest tests/test_card_processor.py -k reviewed_companions` | Use `-k` for function substring match.
 | Fast unit subset | `uv run pytest tests/test_card_processor.py tests/test_jisho_api.py` | Both files use explicit, mocked service inputs.
-| Syntax / lint sanity | `uv run python -m compileall kanji_vocab_miner` | Acts as a quick syntax check in absence of a dedicated linter.
+| Syntax / lint sanity | `uv run python -m compileall kotoba_loop` | Acts as a quick syntax check in absence of a dedicated linter.
 | (Optional) Static format check | `uv run python -m ruff check jisho_anki_tool` | Ruff is not bundled; install via `uv tool install ruff` if the user requests linting.
 | Build distributables | `uv build` | Produces wheel + sdist under `dist/`.
 
@@ -142,7 +142,7 @@ Cues preserve raw definition whitespace and the Anki `rt.known` CSS contract.
 2. `render.py` owns Rich-specific presentation logic; avoid bringing Rich into business logic modules.
 3. `utils.py` is small; add generic helpers that have no external dependencies there. If a helper is domain-specific, place it in the relevant module instead.
 4. `cli.py` owns the command loop, commit review state and activity spinner. `vocab_commit.py` orchestrates included rows; `anki/vocab_notes.py` builds current V3 payloads without I/O. Provider validation, retries and concurrency belong in `enrichment.py`.
-5. In `kanji_vocab_miner/anki/`, `connect.py` owns transport and collection access, including strict versus best-effort inventory contracts. Preserve the executable behavior of legacy `prepare_note`/`add_vocab_note_to_deck`; accurate annotation/docstring updates are allowed. `note_types.py` owns stable legacy/V2/V3 names and immutable `NoteTypeDefinition`/`CardTemplate` concepts; `model_setup.py` serializes them for creation and validated refresh. `schemas.py` holds typed card responses and `VocabNoteFurigana`, the stored-note projection used by maintenance. Top-level `setup.py` owns prerequisite messages and wizard presentation. `furigana_sync.py` owns stored-ruby migration and note-level maintenance across compatible fields, preserving the best-effort reviewed-kanji policy and `rt.known` contract.
+5. In `kotoba_loop/anki/`, `connect.py` owns transport and collection access, including strict versus best-effort inventory contracts. Preserve the executable behavior of legacy `prepare_note`/`add_vocab_note_to_deck`; accurate annotation/docstring updates are allowed. `note_types.py` owns stable legacy/V2/V3 names and immutable `NoteTypeDefinition`/`CardTemplate` concepts; `model_setup.py` serializes them for creation and validated refresh. `schemas.py` holds typed card responses and `VocabNoteFurigana`, the stored-note projection used by maintenance. Top-level `setup.py` owns prerequisite messages and wizard presentation. `furigana_sync.py` owns stored-ruby migration and note-level maintenance across compatible fields, preserving the best-effort reviewed-kanji policy and `rt.known` contract.
 6. Tests follow ownership: `test_vocab_commit.py` mocks application service boundaries; `test_vocab_notes.py` and `test_anki_note_types.py` check pure payloads/formats; `test_anki_connect.py`, `test_anki_model_setup.py` and `test_anki_furigana_sync.py` check their Anki boundaries. `test_setup.py` checks wizard and installer wiring.
 7. Use `config.get_config()` for shared lazy runtime settings; `config.load_config()` explicitly reads fresh settings. Application workflows read configuration directly, not through the Anki adapter. Import collection/model constants from `anki.note_types`, not runtime configuration.
 

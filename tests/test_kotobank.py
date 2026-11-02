@@ -5,7 +5,7 @@ from urllib.parse import quote
 import pytest
 import requests
 
-from kanji_vocab_miner.kotobank import (
+from kotoba_loop.kotobank import (
     JapaneseDefinition,
     KotobankAmbiguousDefinitionError,
     KotobankClient,

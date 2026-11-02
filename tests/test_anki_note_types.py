@@ -5,7 +5,7 @@ from dataclasses import FrozenInstanceError
 
 import pytest
 
-from kanji_vocab_miner.anki.note_types import (
+from kotoba_loop.anki.note_types import (
     FIELDS,
     LEGACY_FIELDS,
     LEGACY_VOCAB_NOTE_TYPE,
@@ -24,9 +24,9 @@ from kanji_vocab_miner.anki.note_types import (
 
 
 def test_vocab_constants_defined() -> None:
-    assert VOCAB_DECK_NAME == "KanjiVocabMiner-Vocabulary"
+    assert VOCAB_DECK_NAME == "KotobaLoop-Vocabulary"
     assert VOCAB_NOTE_TYPE == "MyJapaneseVocabulary"
-    assert VOCAB_TAG == "kanji-vocab-miner"
+    assert VOCAB_TAG == "kotoba-loop"
     assert len(FIELDS) == 8
 
 

@@ -1,4 +1,4 @@
-"""Regenerate kanji_vocab_miner/jlpt_kanji_data.py from a community JLPT kanji list.
+"""Regenerate kotoba_loop/jlpt_kanji_data.py from a community JLPT kanji list.
 
 Like the vocabulary list (see gen_jlpt.py), the JLPT itself has never published
 an official N5-N1 kanji list. This pulls davidluzgouveia/kanji-data (MIT
@@ -20,7 +20,7 @@ RAW_URL = f"https://raw.githubusercontent.com/davidluzgouveia/kanji-data/{COMMIT
 
 OUT_PATH = os.path.join(
     os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
-    "kanji_vocab_miner",
+    "kotoba_loop",
     "jlpt_kanji_data.py",
 )
 

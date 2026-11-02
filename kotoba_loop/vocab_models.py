@@ -3,7 +3,7 @@
 from dataclasses import dataclass, field
 from typing import List, Literal, Optional
 
-from kanji_vocab_miner.jisho import JishoWord
+from kotoba_loop.jisho import JishoWord
 
 
 @dataclass

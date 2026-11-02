@@ -1,8 +1,8 @@
 from typing import List, Dict, Any, Set, Tuple
 
-from kanji_vocab_miner.anki import connect
-from kanji_vocab_miner.jisho import JishoWord
-from kanji_vocab_miner.utils import is_kanji
+from kotoba_loop.anki import connect
+from kotoba_loop.jisho import JishoWord
+from kotoba_loop.utils import is_kanji
 
 def sort_and_limit_words(words: List[JishoWord], original_kanji:str, limit: int = 10) -> List[Tuple[JishoWord, int]]:
     """

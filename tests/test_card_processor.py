@@ -2,8 +2,8 @@ from unittest.mock import patch
 
 import pytest
 
-from kanji_vocab_miner import card_processor
-from kanji_vocab_miner.jisho import JishoWord
+from kotoba_loop import card_processor
+from kotoba_loop.jisho import JishoWord
 
 
 @pytest.fixture

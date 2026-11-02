@@ -17,10 +17,10 @@ from prompt_toolkit.layout.controls import FormattedTextControl
 from prompt_toolkit.layout.containers import HSplit, Window
 from prompt_toolkit.styles import Style
 
-from kanji_vocab_miner import kanji_jlpt
-from kanji_vocab_miner.jisho import JishoWord
-from kanji_vocab_miner.jlpt import LEVEL_COLORS, LevelWord
-from kanji_vocab_miner.vocab_models import PendingVocabItem
+from kotoba_loop import kanji_jlpt
+from kotoba_loop.jisho import JishoWord
+from kotoba_loop.jlpt import LEVEL_COLORS, LevelWord
+from kotoba_loop.vocab_models import PendingVocabItem
 
 
 REVIEW_KEYBINDINGS = {

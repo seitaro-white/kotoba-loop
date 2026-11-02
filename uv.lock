@@ -443,7 +443,7 @@ wheels = [
 ]
 
 [[package]]
-name = "kanji-vocab-miner"
+name = "kotoba-loop"
 version = "0.1.0"
 source = { editable = "." }
 dependencies = [

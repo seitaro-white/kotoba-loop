@@ -2,9 +2,9 @@
 
 import sys
 
-from kanji_vocab_miner.anki import connect
-from kanji_vocab_miner.config import get_config
-from kanji_vocab_miner.jouyou_data import BY_GRADE
+from kotoba_loop.anki import connect
+from kotoba_loop.config import get_config
+from kotoba_loop.jouyou_data import BY_GRADE
 
 
 def main() -> int:

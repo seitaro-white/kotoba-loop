@@ -1,4 +1,4 @@
-# Kanji Vocab Miner
+# Kotoba Loop
 
 This is a very simple CLI tool to help with learning Japanese kanji and vocabulary. It glues together Jisho (an online Japanese dictionary) and Anki (the flashcard program), and designed with a context-based learning approach to Kanji in mind; as new kanji are learned, we find new vocabulary that include those Kanji to learn the readings (rather that painful rote memorization of kun and on readings from kanji alone).
 
@@ -31,23 +31,23 @@ Using this tool requires some Anki setup:
 3. **"All in One Kanji" Deck** - Download from [AnkiWeb](https://ankiweb.net/shared/info/1862058740)
    - This is the recommended kanji deck that the tool expects by default.
    - File → Import → Browse to downloaded `.apkg` file
-   - The tool will re-order existing cards from this deck for kanji study, while creating new vocabulary cards in a separate deck, `KanjiVocabMiner-Vocabulary`.
-   - The kanji deck name can be changed with `[kanji_deck] name` in `~/.config/kanji-vocab-miner/config.toml` (see [sample-config.toml](sample-config.toml)).
+   - The tool will re-order existing cards from this deck for kanji study, while creating new vocabulary cards in a separate deck, `KotobaLoop-Vocabulary`.
+   - The kanji deck name can be changed with `[kanji_deck] name` in `~/.config/kotoba-loop/config.toml` (see [sample-config.toml](sample-config.toml)).
 
 Once this is done (and Anki is running with AnkiConnect enabled), install the tool with [uv](https://docs.astral.sh/uv/):
 
 ```bash
-uv tool install git+https://github.com/seitaro-white/kanji-vocab-builder.git
-kanji-vocab-miner setup
+uv tool install git+https://github.com/seitaro-white/kotoba-loop.git
+kotoba-loop setup
 ```
 
-`setup` creates the `KanjiVocabMiner-Vocabulary` deck and the `MyJapaneseVocabularyV3` note type in Anki. This installs `kanji-vocab-miner` globally so you can run it from any directory. If you don't have uv installed, follow the [uv installation guide](https://docs.astral.sh/uv/getting-started/installation/).
+`setup` creates the `KotobaLoop-Vocabulary` deck and the `MyJapaneseVocabularyV3` note type in Anki. This installs `kotoba-loop` globally so you can run it from any directory. If you don't have uv installed, follow the [uv installation guide](https://docs.astral.sh/uv/getting-started/installation/).
 
 To update to the latest version (re-running `setup` refreshes the Anki note type and templates):
 
 ```bash
-uv tool upgrade kanji-vocab-miner
-kanji-vocab-miner setup
+uv tool upgrade kotoba-loop
+kotoba-loop setup
 ```
 
 
@@ -55,7 +55,7 @@ kanji-vocab-miner setup
 
 ### Interactive Mode
 
-Make sure Anki is running and run `kanji-vocab-miner` to start the interactive session:
+Make sure Anki is running and run `kotoba-loop` to start the interactive session:
 
 **Commands:**
 - `n` - Look up the kanji on the card currently open in Anki Reviewer

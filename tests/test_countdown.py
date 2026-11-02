@@ -2,7 +2,7 @@
 
 from datetime import date
 
-from kanji_vocab_miner.countdown import format_jlpt_countdown
+from kotoba_loop.countdown import format_jlpt_countdown
 
 
 def test_countdown_formats_weeks_and_remaining_days():

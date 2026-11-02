@@ -5,7 +5,7 @@ from pathlib import Path
 
 import pytest
 
-from kanji_vocab_miner import jmdict
+from kotoba_loop import jmdict
 
 
 @pytest.fixture

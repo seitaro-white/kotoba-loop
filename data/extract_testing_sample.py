@@ -9,7 +9,7 @@ import re
 from jamdict import Jamdict
 import pandas as pd
 
-from kanji_vocab_miner.kanji_jlpt import get_kanji_level_index
+from kotoba_loop.kanji_jlpt import get_kanji_level_index
 
 
 # %%

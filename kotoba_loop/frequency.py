@@ -11,7 +11,7 @@ import re
 import sqlite3
 from dataclasses import dataclass
 
-from kanji_vocab_miner.jmdict import database_path
+from kotoba_loop.jmdict import database_path
 
 _NF_RE = re.compile(r"^nf(\d+)$")
 

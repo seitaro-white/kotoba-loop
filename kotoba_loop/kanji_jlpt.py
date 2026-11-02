@@ -6,9 +6,9 @@ See jlpt_kanji_data.py for provenance and caveats. Level formatting/parsing
 
 import functools
 
-from kanji_vocab_miner.jlpt import NUM_LEVELS
-from kanji_vocab_miner.jlpt_kanji_data import LEVELS
-from kanji_vocab_miner.utils import is_kanji
+from kotoba_loop.jlpt import NUM_LEVELS
+from kotoba_loop.jlpt_kanji_data import LEVELS
+from kotoba_loop.utils import is_kanji
 
 
 @functools.lru_cache(maxsize=1)

@@ -2,25 +2,25 @@
 
 from dataclasses import dataclass
 
-from kanji_vocab_miner.anki import connect as ankiconnect
-from kanji_vocab_miner.anki.note_types import VOCAB_DECK_NAME
-from kanji_vocab_miner.anki.vocab_notes import prepare_vocab_note
-from kanji_vocab_miner.config import (
+from kotoba_loop.anki import connect as ankiconnect
+from kotoba_loop.anki.note_types import VOCAB_DECK_NAME
+from kotoba_loop.anki.vocab_notes import prepare_vocab_note
+from kotoba_loop.config import (
     AppConfig,
     get_config,
     get_llm_api_key,
     resolve_prompt_path,
 )
-from kanji_vocab_miner.enrichment import (
+from kotoba_loop.enrichment import (
     DeepSeekEnrichmentClient,
     VocabEnrichment,
     generate_enrichments,
 )
-from kanji_vocab_miner.furigana import render_japanese_cue
-from kanji_vocab_miner.jisho import fetch_jisho_word_furigana
-from kanji_vocab_miner.jmdict import sibling_spellings
-from kanji_vocab_miner.kotobank import JapaneseDefinition, KotobankClient
-from kanji_vocab_miner.vocab_models import AddFailure, BatchAddResult, PendingVocabItem
+from kotoba_loop.furigana import render_japanese_cue
+from kotoba_loop.jisho import fetch_jisho_word_furigana
+from kotoba_loop.jmdict import sibling_spellings
+from kotoba_loop.kotobank import JapaneseDefinition, KotobankClient
+from kotoba_loop.vocab_models import AddFailure, BatchAddResult, PendingVocabItem
 
 
 @dataclass(frozen=True)
@@ -165,7 +165,7 @@ def add_vocab_items(
         enrichment_client = _create_enrichment_client(app_config)
     if enrichment_client is None:
         message = (
-            "Missing KANJI_VOCAB_MINER_LLM__API_KEY; set it before "
+            "Missing KOTOBA_LOOP_LLM__API_KEY; set it before "
             "committing vocabulary."
         )
         result.failed = [

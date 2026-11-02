@@ -3,8 +3,8 @@
 from collections.abc import Iterator
 from html import escape
 
-from kanji_vocab_miner.article_reader import ArticleToken
-from kanji_vocab_miner.furigana import render_token_furigana
+from kotoba_loop.article_reader import ArticleToken
+from kotoba_loop.furigana import render_token_furigana
 
 # A bounded display policy, not a replacement for Sudachi's morphological tokens.
 _INFLECTION_AUXILIARIES = {

@@ -5,16 +5,16 @@ import re
 import pytest
 from rich.console import Console
 
-from kanji_vocab_miner import render
-from kanji_vocab_miner.jisho import JishoWord, KanjiSummary
-from kanji_vocab_miner.progress import (
+from kotoba_loop import render
+from kotoba_loop.jisho import JishoWord, KanjiSummary
+from kotoba_loop.progress import (
     KanjiProgress,
     LevelBar,
     ManualProgress,
     ManualProgressBar,
     VocabProgress,
 )
-from kanji_vocab_miner.review_status import KanjiReviewStatus
+from kotoba_loop.review_status import KanjiReviewStatus
 
 
 @pytest.fixture

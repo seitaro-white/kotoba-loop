@@ -1,10 +1,10 @@
-# Kanji Vocab Miner Configuration
+# Kotoba Loop Configuration
 #
-# Copy this file to ~/.config/kanji-vocab-miner/config.toml to customize settings.
+# Copy this file to ~/.config/kotoba-loop/config.toml to customize settings.
 # All settings are optional - the tool will use these defaults if not specified.
 #
 # Note: The vocabulary deck and note type are created automatically by the
-# 'kanji-vocab-miner setup' command and do not need to be configured.
+# 'kotoba-loop setup' command and do not need to be configured.
 
 [ankiconnect]
 # AnkiConnect URL (requires Anki running with AnkiConnect plugin)
@@ -17,11 +17,11 @@ name = "All in One Kanji"
 
 [llm]
 # Editable instructions used for DeepSeek vocabulary enrichment.
-prompt_path = "~/.config/kanji-vocab-miner/enrichment-prompt.md"
+prompt_path = "~/.config/kotoba-loop/enrichment-prompt.md"
 
 # Maximum simultaneous DeepSeek generation requests (allowed range: 1-10).
 concurrency = 5
 
 # The API key must not be added to this TOML file. Export it or place it in a
 # .env file in the directory where you launch the tool:
-# KANJI_VOCAB_MINER_LLM__API_KEY="your-api-key"
+# KOTOBA_LOOP_LLM__API_KEY="your-api-key"

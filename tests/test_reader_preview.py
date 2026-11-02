@@ -10,8 +10,8 @@ import pytest
 import requests
 from bs4 import BeautifulSoup
 
-from kanji_vocab_miner.article_reader import analyze_article
-from kanji_vocab_miner.article_render import render_article_html
+from kotoba_loop.article_reader import analyze_article
+from kotoba_loop.article_render import render_article_html
 
 ROOT = Path(__file__).resolve().parents[1]
 CORPUS = json.loads(

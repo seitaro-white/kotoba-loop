@@ -9,10 +9,10 @@ from prompt_toolkit.input import create_pipe_input
 from prompt_toolkit.output import ColorDepth
 from prompt_toolkit.output.vt100 import Vt100_Output
 
-from kanji_vocab_miner import review
-from kanji_vocab_miner.jisho import JishoWord
-from kanji_vocab_miner.jlpt import LevelWord
-from kanji_vocab_miner.vocab_models import PendingVocabItem
+from kotoba_loop import review
+from kotoba_loop.jisho import JishoWord
+from kotoba_loop.jlpt import LevelWord
+from kotoba_loop.vocab_models import PendingVocabItem
 
 
 def _word(expression: str, kana: str = "") -> JishoWord:

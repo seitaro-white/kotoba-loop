@@ -4,7 +4,7 @@ import re
 from html import escape
 from typing import List, Set
 
-from kanji_vocab_miner.japanese_tokenizer import tokenize_japanese
+from kotoba_loop.japanese_tokenizer import tokenize_japanese
 
 _KANJI_RANGE = (
     r"\u3400-\u4dbf\u4e00-\u9fff\uf900-\ufaff"

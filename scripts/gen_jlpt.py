@@ -1,4 +1,4 @@
-"""Regenerate kanji_vocab_miner/jlpt_data.py from a community JLPT word list.
+"""Regenerate kotoba_loop/jlpt_data.py from a community JLPT word list.
 
 The JLPT stopped publishing an official vocabulary list after the 2010 test
 revision, so there is no authoritative N5-N1 word list. This pulls the
@@ -20,7 +20,7 @@ RAW_URL = f"https://raw.githubusercontent.com/elzup/jlpt-word-list/{COMMIT}/src/
 
 OUT_PATH = os.path.join(
     os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
-    "kanji_vocab_miner",
+    "kotoba_loop",
     "jlpt_data.py",
 )
 

@@ -5,13 +5,13 @@ from unittest.mock import call, patch
 
 import pytest
 
-from kanji_vocab_miner.anki.model_setup import (
+from kotoba_loop.anki.model_setup import (
     create_note_type_v2,
     create_note_type_v3,
     update_note_type_v2,
     update_note_type_v3,
 )
-from kanji_vocab_miner.anki.note_types import (
+from kotoba_loop.anki.note_types import (
     NoteTypeDefinition,
     vocab_note_type_v2,
     vocab_note_type_v3,
@@ -28,7 +28,7 @@ from kanji_vocab_miner.anki.note_types import (
 def test_create_serializes_named_definition_at_anki_boundary(
     create: Callable[[], None], definition: NoteTypeDefinition
 ) -> None:
-    with patch("kanji_vocab_miner.anki.model_setup.connect.send_request") as send:
+    with patch("kotoba_loop.anki.model_setup.connect.send_request") as send:
         create()
     send.assert_called_once_with(
         "createModel",
@@ -57,7 +57,7 @@ def test_refresh_validates_then_updates_only_templates_and_css(
     definition: NoteTypeDefinition, update: Callable[[], None]
 ) -> None:
     """Refresh matches creation without mutating fields, notes or older models."""
-    with patch("kanji_vocab_miner.anki.model_setup.connect.send_request") as send:
+    with patch("kotoba_loop.anki.model_setup.connect.send_request") as send:
         send.side_effect = [list(definition.field_names), None, None]
         update()
 
@@ -93,7 +93,7 @@ def test_refresh_rejects_incompatible_fields_before_mutation(
 ) -> None:
     fields = list(definition.field_names)
     actual_fields = list(reversed(fields)) if reordered else ["Front", "Back"]
-    with patch("kanji_vocab_miner.anki.model_setup.connect.send_request") as send:
+    with patch("kotoba_loop.anki.model_setup.connect.send_request") as send:
         send.return_value = actual_fields
         with pytest.raises(ValueError) as error:
             update()
@@ -108,7 +108,7 @@ def test_refresh_rejects_incompatible_fields_before_mutation(
 def test_refresh_propagates_field_read_failure_without_mutation(
     update: Callable[[], None],
 ) -> None:
-    with patch("kanji_vocab_miner.anki.model_setup.connect.send_request") as send:
+    with patch("kotoba_loop.anki.model_setup.connect.send_request") as send:
         send.side_effect = RuntimeError("offline")
         with pytest.raises(RuntimeError, match="offline"):
             update()

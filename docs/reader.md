@@ -3,7 +3,7 @@
 Start the localhost-only web reader with Anki Desktop and AnkiConnect running:
 
 ```bash
-kanji-vocab-miner web
+kotoba-loop web
 # Open http://127.0.0.1:8766
 ```
 
@@ -35,7 +35,7 @@ to N2.
 
 A token is treated as known when its normalized dictionary identity matches an
 `Expression` in the configured Anki vocabulary deck or an entry in
-`~/.config/kanji-vocab-miner/known_vocab.txt`. The reader reloads both sources
+`~/.config/kotoba-loop/known_vocab.txt`. The reader reloads both sources
 on every submission, along with kanji from the configured kanji deck. The kanji
 inventory uses the existing reviewed-card criterion (`-is:new OR flag:1`), not kanji
 that merely occur in vocabulary cards. If either Anki inventory cannot be loaded,
@@ -72,7 +72,7 @@ grouped ruby when reliable kana alignment is unavailable.
 
 ```bash
 uv sync
-uv run python -m kanji_vocab_miner.web --demo
+uv run python -m kotoba_loop.web --demo
 # Open http://127.0.0.1:8766 (use --port 8767 if needed)
 ```
 

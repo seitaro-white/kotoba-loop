@@ -2,8 +2,8 @@
 
 from datetime import date
 
-from kanji_vocab_miner import manual_progress
-from kanji_vocab_miner.progress import ManualProgressCounts
+from kotoba_loop import manual_progress
+from kotoba_loop.progress import ManualProgressCounts
 
 
 def test_manual_progress_path_uses_current_directory(monkeypatch, tmp_path):

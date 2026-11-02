@@ -1,10 +1,10 @@
 """Current vocabulary note serialization and safe enrichment rendering."""
 
-from kanji_vocab_miner.anki import vocab_notes
-from kanji_vocab_miner.enrichment import VocabEnrichment
-from kanji_vocab_miner.jisho import JishoWord
-from kanji_vocab_miner.kotobank import JapaneseDefinition
-from kanji_vocab_miner.vocab_models import PendingVocabItem
+from kotoba_loop.anki import vocab_notes
+from kotoba_loop.enrichment import VocabEnrichment
+from kotoba_loop.jisho import JishoWord
+from kotoba_loop.kotobank import JapaneseDefinition
+from kotoba_loop.vocab_models import PendingVocabItem
 
 
 def test_prepare_vocab_note_builds_exact_recognition_only_payload() -> None:
@@ -60,7 +60,7 @@ def test_prepare_vocab_note_builds_exact_recognition_only_payload() -> None:
             "Example": '<strong class="example-target">学校</strong>へ行く。',
             "KanjiExplanation": "学 relates to learning and 校 to school.",
         },
-        "tags": ["kanji-vocab-miner"],
+        "tags": ["kotoba-loop"],
         "options": {"allowDuplicate": False},
     }
 

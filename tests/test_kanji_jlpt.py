@@ -1,6 +1,6 @@
 """Tests for the JLPT kanji-level index and hardest-kanji lookup."""
 
-from kanji_vocab_miner import kanji_jlpt
+from kotoba_loop import kanji_jlpt
 
 
 def test_hardest_kanji_returns_an_n3_kanji_when_both_are_n3():

@@ -7,20 +7,20 @@ from unittest.mock import create_autospec
 
 import pytest
 
-from kanji_vocab_miner import config as config_module
-from kanji_vocab_miner import jisho, vocab_commit
-from kanji_vocab_miner.anki import connect
-from kanji_vocab_miner.anki.note_types import VOCAB_DECK_NAME
-from kanji_vocab_miner.config import AppConfig
-from kanji_vocab_miner.enrichment import (
+from kotoba_loop import config as config_module
+from kotoba_loop import jisho, vocab_commit
+from kotoba_loop.anki import connect
+from kotoba_loop.anki.note_types import VOCAB_DECK_NAME
+from kotoba_loop.config import AppConfig
+from kotoba_loop.enrichment import (
     DeepSeekEnrichmentClient,
     EnrichmentError,
     EnrichmentOutcome,
     VocabEnrichment,
 )
-from kanji_vocab_miner.jisho import JishoWord
-from kanji_vocab_miner.kotobank import JapaneseDefinition, KotobankClient
-from kanji_vocab_miner.vocab_models import PendingVocabItem
+from kotoba_loop.jisho import JishoWord
+from kotoba_loop.kotobank import JapaneseDefinition, KotobankClient
+from kotoba_loop.vocab_models import PendingVocabItem
 
 
 def _definition(expression: str, candidate_spellings=()) -> JapaneseDefinition:
@@ -369,7 +369,7 @@ def test_add_vocab_items_missing_key_short_circuits_after_duplicates(
     assert result.added == []
     assert [failure.item for failure in result.failed] == [eligible]
     assert result.failed[0].stage == "enrichment"
-    assert "KANJI_VOCAB_MINER_LLM__API_KEY" in result.failed[0].message
+    assert "KOTOBA_LOOP_LLM__API_KEY" in result.failed[0].message
     assert eligible.recall_enabled is True
     assert forbidden_calls == []
 

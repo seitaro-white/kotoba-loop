@@ -7,7 +7,7 @@ import functools
 
 from pydantic import BaseModel
 
-from kanji_vocab_miner.jlpt_data import WORDS
+from kotoba_loop.jlpt_data import WORDS
 
 NUM_LEVELS = 5  # N5 (easiest) .. N1 (hardest)
 

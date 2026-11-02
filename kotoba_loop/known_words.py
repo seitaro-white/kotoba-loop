@@ -6,7 +6,7 @@ already-known expressions again. These entries do not affect core-6k progress.
 
 from pathlib import Path
 
-from kanji_vocab_miner.config import get_config_path
+from kotoba_loop.config import get_config_path
 
 
 def known_words_path() -> Path:

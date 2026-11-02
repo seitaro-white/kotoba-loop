@@ -4,7 +4,7 @@ from dataclasses import FrozenInstanceError
 
 import pytest
 
-from kanji_vocab_miner.anki.schemas import VocabNoteFurigana
+from kotoba_loop.anki.schemas import VocabNoteFurigana
 
 
 def test_note_furigana_projects_only_supported_fields() -> None:

@@ -1,4 +1,4 @@
-"""Configuration management for kanji-vocab-miner."""
+"""Configuration management for kotoba-loop."""
 
 import os
 import tomllib
@@ -26,7 +26,7 @@ class KanjiDeckConfig(BaseModel):
 class LLMConfig(BaseModel):
     """Non-secret settings for vocabulary enrichment."""
 
-    prompt_path: Path = Path("~/.config/kanji-vocab-miner/enrichment-prompt.md")
+    prompt_path: Path = Path("~/.config/kotoba-loop/enrichment-prompt.md")
     concurrency: int = Field(default=5, ge=1, le=10)
 
 
@@ -34,7 +34,7 @@ class AppConfig(BaseSettings):
     """Application configuration with environment variable support."""
 
     model_config = SettingsConfigDict(
-        env_prefix="KANJI_VOCAB_MINER_", env_nested_delimiter="__"
+        env_prefix="KOTOBA_LOOP_", env_nested_delimiter="__"
     )
 
     ankiconnect: AnkiConnectConfig = Field(default_factory=AnkiConnectConfig)
@@ -42,7 +42,7 @@ class AppConfig(BaseSettings):
     llm: LLMConfig = Field(default_factory=LLMConfig)
 
 
-LLM_API_KEY_ENV_VAR = "KANJI_VOCAB_MINER_LLM__API_KEY"
+LLM_API_KEY_ENV_VAR = "KOTOBA_LOOP_LLM__API_KEY"
 DEFAULT_PROMPT_RESOURCE = "resources/enrichment-prompt.md"
 
 
@@ -77,7 +77,7 @@ def provision_default_prompt(prompt_path: Union[Path, str]) -> Path:
 
     destination.parent.mkdir(parents=True, exist_ok=True)
     prompt_bytes = (
-        resources.files("kanji_vocab_miner")
+        resources.files("kotoba_loop")
         .joinpath(DEFAULT_PROMPT_RESOURCE)
         .read_bytes()
     )
@@ -94,13 +94,13 @@ def get_config_path() -> Path:
     """Return XDG-compliant config file path.
 
     Checks for config in order:
-    1. ~/.config/kanji-vocab-miner/config.toml (XDG base directory)
-    2. ~/.kanji-vocab-miner.toml (fallback)
+    1. ~/.config/kotoba-loop/config.toml (XDG base directory)
+    2. ~/.kotoba-loop.toml (fallback)
 
     Returns the first existing path, or the XDG path if neither exists.
     """
-    xdg_config = Path.home() / ".config" / "kanji-vocab-miner" / "config.toml"
-    home_config = Path.home() / ".kanji-vocab-miner.toml"
+    xdg_config = Path.home() / ".config" / "kotoba-loop" / "config.toml"
+    home_config = Path.home() / ".kotoba-loop.toml"
 
     if xdg_config.exists():
         return xdg_config
@@ -115,7 +115,7 @@ def load_config() -> AppConfig:
 
     Loads config from TOML file at get_config_path() if it exists.
     Falls back to default values if no config file is found.
-    Environment variables with KANJI_VOCAB_MINER_ prefix override all settings.
+    Environment variables with KOTOBA_LOOP_ prefix override all settings.
 
     Returns:
         AppConfig instance with loaded or default configuration

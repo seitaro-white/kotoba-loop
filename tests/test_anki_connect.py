@@ -6,10 +6,10 @@ from unittest.mock import Mock
 import pytest
 import requests
 
-from kanji_vocab_miner.anki import connect
-from kanji_vocab_miner.anki.note_types import VOCAB_DECK_NAME
-from kanji_vocab_miner.jisho import JishoWord
-from kanji_vocab_miner.review_status import KanjiReviewStatus
+from kotoba_loop.anki import connect
+from kotoba_loop.anki.note_types import VOCAB_DECK_NAME
+from kotoba_loop.jisho import JishoWord
+from kotoba_loop.review_status import KanjiReviewStatus
 
 
 @pytest.mark.integration
@@ -445,7 +445,7 @@ def test_get_vocab_expressions_reads_unique_note_fields(monkeypatch) -> None:
 
     assert connect.get_vocab_expressions() == {"学校", "猫", "犬"}
     assert calls == [
-        ("findNotes", {"query": 'deck:"KanjiVocabMiner-Vocabulary"'}),
+        ("findNotes", {"query": 'deck:"KotobaLoop-Vocabulary"'}),
         ("notesInfo", {"notes": [10, 20, 30, 40, 50, 60]}),
     ]
 
@@ -478,7 +478,7 @@ def test_prepare_legacy_note_keeps_primary_and_additional_definitions(monkeypatc
             "Additional Definitions": "The spoken and written language of Japan.",
             "JLPT": "JLPT N3",
         },
-        "tags": ["kanji-vocab-miner"],
+        "tags": ["kotoba-loop"],
         "options": {"allowDuplicate": False},
     }
     assert prepared_note_full == expected_note_full
@@ -512,7 +512,7 @@ def test_prepare_legacy_note_leaves_additional_definitions_empty_for_one_sense(
             "Additional Definitions": "",  # Expect empty string if only one definition
             "JLPT": "JLPT N4",
         },
-        "tags": ["kanji-vocab-miner"],
+        "tags": ["kotoba-loop"],
         "options": {"allowDuplicate": False},
     }
     assert prepared_note_minimal == expected_note_minimal

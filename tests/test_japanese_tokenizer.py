@@ -4,7 +4,7 @@ from itertools import pairwise
 
 import pytest
 
-from kanji_vocab_miner.japanese_tokenizer import tokenize_japanese
+from kotoba_loop.japanese_tokenizer import tokenize_japanese
 
 
 def test_native_tokens_expose_source_offsets_readings_and_named_pos() -> None:

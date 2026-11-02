@@ -6,17 +6,17 @@ from typing import Any, Dict, List, Optional, Set
 import requests
 from tqdm import tqdm
 
-from kanji_vocab_miner.anki.note_types import (
+from kotoba_loop.anki.note_types import (
     FIELDS,
     VOCAB_DECK_NAME,
     VOCAB_NOTE_TYPE,
     VOCAB_TAG,
 )
-from kanji_vocab_miner.anki.schemas import KanjiCard
-from kanji_vocab_miner.config import get_config
-from kanji_vocab_miner.jisho import JishoWord, fetch_jisho_word_furigana
-from kanji_vocab_miner.review_status import KanjiReviewStatus
-from kanji_vocab_miner.utils import is_kanji
+from kotoba_loop.anki.schemas import KanjiCard
+from kotoba_loop.config import get_config
+from kotoba_loop.jisho import JishoWord, fetch_jisho_word_furigana
+from kotoba_loop.review_status import KanjiReviewStatus
+from kotoba_loop.utils import is_kanji
 
 
 def get_anki_url() -> str:

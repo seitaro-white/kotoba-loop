@@ -6,9 +6,9 @@ from unittest.mock import Mock, patch
 import pytest
 from pydantic import ValidationError
 
-from kanji_vocab_miner import config as config_module
-from kanji_vocab_miner.anki import connect
-from kanji_vocab_miner.config import (
+from kotoba_loop import config as config_module
+from kotoba_loop.anki import connect
+from kotoba_loop.config import (
     AppConfig,
     get_llm_api_key,
     load_config,
@@ -49,7 +49,7 @@ def test_get_config_does_not_cache_a_loading_error(
 
 def test_load_config_defaults():
     """Test that config loads with sensible defaults when no file exists."""
-    with patch("kanji_vocab_miner.config.get_config_path") as mock_path:
+    with patch("kotoba_loop.config.get_config_path") as mock_path:
         mock_path.return_value = Path("/nonexistent/config.toml")
         config = load_config()
 
@@ -58,7 +58,7 @@ def test_load_config_defaults():
         assert config.kanji_deck.name == "All in One Kanji"
         assert config.llm.concurrency == 5
         assert config.llm.prompt_path == Path(
-            "~/.config/kanji-vocab-miner/enrichment-prompt.md"
+            "~/.config/kotoba-loop/enrichment-prompt.md"
         )
 
 
@@ -78,7 +78,7 @@ def test_load_config_from_file(tmp_path):
         """
     config_file.write_text(config_content)
 
-    with patch("kanji_vocab_miner.config.get_config_path") as mock_path:
+    with patch("kotoba_loop.config.get_config_path") as mock_path:
         mock_path.return_value = config_file
         config = load_config()
 
@@ -90,7 +90,7 @@ def test_load_config_from_file(tmp_path):
 
 def test_resolve_prompt_path_expands_tilde_with_current_home(tmp_path) -> None:
     """Prompt resolution expands the configured home deterministically."""
-    with patch("kanji_vocab_miner.config.Path.home", return_value=tmp_path):
+    with patch("kotoba_loop.config.Path.home", return_value=tmp_path):
         resolved = resolve_prompt_path(Path("~/.config/custom-prompt.md"))
 
     assert resolved == tmp_path / ".config" / "custom-prompt.md"
@@ -102,10 +102,10 @@ def test_llm_api_key_is_not_read_from_toml(tmp_path, monkeypatch) -> None:
     config_file.write_text(
         '[llm]\napi_key = "toml-secret"\n', encoding="utf-8"
     )
-    monkeypatch.delenv("KANJI_VOCAB_MINER_LLM__API_KEY", raising=False)
+    monkeypatch.delenv("KOTOBA_LOOP_LLM__API_KEY", raising=False)
     monkeypatch.chdir(tmp_path)
 
-    with patch("kanji_vocab_miner.config.get_config_path", return_value=config_file):
+    with patch("kotoba_loop.config.get_config_path", return_value=config_file):
         config = load_config()
 
     assert not hasattr(config.llm, "api_key")
@@ -117,9 +117,9 @@ def test_llm_api_key_is_read_from_current_directory_dotenv(
 ) -> None:
     """A repository-local .env supplies the key without shell setup."""
     (tmp_path / ".env").write_text(
-        'KANJI_VOCAB_MINER_LLM__API_KEY="dotenv-secret"\n', encoding="utf-8"
+        'KOTOBA_LOOP_LLM__API_KEY="dotenv-secret"\n', encoding="utf-8"
     )
-    monkeypatch.delenv("KANJI_VOCAB_MINER_LLM__API_KEY", raising=False)
+    monkeypatch.delenv("KOTOBA_LOOP_LLM__API_KEY", raising=False)
     monkeypatch.chdir(tmp_path)
 
     assert get_llm_api_key() == "dotenv-secret"
@@ -128,10 +128,10 @@ def test_llm_api_key_is_read_from_current_directory_dotenv(
 def test_llm_api_key_environment_overrides_dotenv(tmp_path, monkeypatch) -> None:
     """An explicitly exported key takes precedence over a local .env value."""
     (tmp_path / ".env").write_text(
-        "KANJI_VOCAB_MINER_LLM__API_KEY=dotenv-secret\n", encoding="utf-8"
+        "KOTOBA_LOOP_LLM__API_KEY=dotenv-secret\n", encoding="utf-8"
     )
     monkeypatch.chdir(tmp_path)
-    monkeypatch.setenv("KANJI_VOCAB_MINER_LLM__API_KEY", "environment-secret")
+    monkeypatch.setenv("KOTOBA_LOOP_LLM__API_KEY", "environment-secret")
 
     assert get_llm_api_key() == "environment-secret"
 

@@ -1,6 +1,6 @@
 """Tests for the embedded Jouyou kanji list."""
 
-from kanji_vocab_miner import jouyou_data
+from kotoba_loop import jouyou_data
 
 
 # Per-grade counts as recorded in KanjiDic2 (the authoritative source we

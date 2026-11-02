@@ -7,10 +7,10 @@ import requests
 from bs4 import BeautifulSoup
 from flask import render_template
 
-from kanji_vocab_miner import known_words, web
-from kanji_vocab_miner.anki import connect
-from kanji_vocab_miner.article_reader import JlptVocabularyGroup, VocabularyCount
-from kanji_vocab_miner.web import create_app as create_reader_app
+from kotoba_loop import known_words, web
+from kotoba_loop.anki import connect
+from kotoba_loop.article_reader import JlptVocabularyGroup, VocabularyCount
+from kotoba_loop.web import create_app as create_reader_app
 
 # Every web test explicitly avoids real Anki kanji loading as well as vocabulary IO.
 create_app = partial(create_reader_app, kanji_loader=set)

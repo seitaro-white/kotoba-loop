@@ -3,8 +3,8 @@
 from dataclasses import dataclass
 from datetime import date
 
-from kanji_vocab_miner import kanji_jlpt
-from kanji_vocab_miner.jouyou_data import JOUYOU
+from kotoba_loop import kanji_jlpt
+from kotoba_loop.jouyou_data import JOUYOU
 
 # The current kanji study goal is JLPT N2 and everything below it, easiest first.
 KANJI_TARGET_LEVELS: list[int] = [5, 4, 3, 2]

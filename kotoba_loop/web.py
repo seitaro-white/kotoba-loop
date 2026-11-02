@@ -6,13 +6,13 @@ from collections.abc import Callable
 from flask import Flask, render_template, request
 from markupsafe import Markup
 
-from kanji_vocab_miner.anki.connect import get_reviewed_kanji, get_vocab_expressions
-from kanji_vocab_miner.article_reader import (
+from kotoba_loop.anki.connect import get_reviewed_kanji, get_vocab_expressions
+from kotoba_loop.article_reader import (
     analyze_article,
     build_unknown_vocabulary_summary,
 )
-from kanji_vocab_miner.article_render import render_article_html
-from kanji_vocab_miner.known_words import load_known_words
+from kotoba_loop.article_render import render_article_html
+from kotoba_loop.known_words import load_known_words
 
 
 def load_reader_known_kanji() -> set[str]:

@@ -9,7 +9,7 @@ import requests
 from bs4 import BeautifulSoup, Tag
 from pydantic import BaseModel
 
-from kanji_vocab_miner.furigana import render_token_furigana
+from kotoba_loop.furigana import render_token_furigana
 
 KANJI_DETAIL_SUFFIX = "%23kanji"
 KANJI_BASE_URL = "https://jisho.org/search/"

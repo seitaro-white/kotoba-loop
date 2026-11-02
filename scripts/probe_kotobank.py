@@ -5,7 +5,7 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import List, Optional
 
-from kanji_vocab_miner.kotobank import (
+from kotoba_loop.kotobank import (
     KotobankClient,
     KotobankDefinitionNotFound,
     KotobankParseError,

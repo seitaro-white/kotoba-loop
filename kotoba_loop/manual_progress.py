@@ -3,7 +3,7 @@
 import tomllib
 from pathlib import Path
 
-from kanji_vocab_miner.progress import ManualProgressCounts
+from kotoba_loop.progress import ManualProgressCounts
 
 MANUAL_PROGRESS_FILENAME = "manual_progress.toml"
 

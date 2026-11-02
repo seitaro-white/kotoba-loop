@@ -9,12 +9,12 @@ from unittest.mock import Mock
 import pytest
 from click.testing import CliRunner
 
-from kanji_vocab_miner import cli, setup
-from kanji_vocab_miner.jisho import JishoWord, KanjiSummary
-from kanji_vocab_miner.jlpt import LevelWord
-from kanji_vocab_miner.progress import ManualProgressCounts
-from kanji_vocab_miner.review import ReviewResult
-from kanji_vocab_miner.vocab_models import (
+from kotoba_loop import cli, setup
+from kotoba_loop.jisho import JishoWord, KanjiSummary
+from kotoba_loop.jlpt import LevelWord
+from kotoba_loop.progress import ManualProgressCounts
+from kotoba_loop.review import ReviewResult
+from kotoba_loop.vocab_models import (
     AddFailure,
     BatchAddResult,
     PendingVocabItem,
@@ -58,7 +58,7 @@ def test_stats_shows_manual_section_counts_and_vocab_since_baseline(monkeypatch)
 
 def test_web_command_binds_localhost_without_debug(monkeypatch):
     """The reader never exposes Flask to the LAN or enables debug mode."""
-    from kanji_vocab_miner import web
+    from kotoba_loop import web
 
     run_options = []
     monkeypatch.setattr(

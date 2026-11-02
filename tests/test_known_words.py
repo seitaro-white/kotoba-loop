@@ -1,6 +1,6 @@
 """Tests for the known-words store."""
 
-from kanji_vocab_miner import known_words
+from kotoba_loop import known_words
 
 
 def test_load_missing_file_returns_empty(tmp_path):

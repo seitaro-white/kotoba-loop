@@ -8,10 +8,10 @@ from rich.table import Table
 from rich.text import Text
 from rich.rule import Rule
 
-from kanji_vocab_miner import countdown, frequency, jlpt
-from kanji_vocab_miner.review_status import KanjiReviewStatus
-from kanji_vocab_miner.jisho import JishoWord, KanjiSummary
-from kanji_vocab_miner.progress import (
+from kotoba_loop import countdown, frequency, jlpt
+from kotoba_loop.review_status import KanjiReviewStatus
+from kotoba_loop.jisho import JishoWord, KanjiSummary
+from kotoba_loop.progress import (
     KanjiProgress,
     ManualProgress,
     ManualProgressBar,

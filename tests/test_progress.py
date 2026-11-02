@@ -2,8 +2,8 @@
 
 from datetime import date
 
-from kanji_vocab_miner import kanji_jlpt, progress
-from kanji_vocab_miner.progress import ManualProgressCounts
+from kotoba_loop import kanji_jlpt, progress
+from kotoba_loop.progress import ManualProgressCounts
 
 
 def test_kanji_coverage_counts_only_jouyou():

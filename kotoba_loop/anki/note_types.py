@@ -3,12 +3,12 @@
 from dataclasses import dataclass
 
 # These are collection conventions, not runtime configuration.
-VOCAB_DECK_NAME = "KanjiVocabMiner-Vocabulary"
+VOCAB_DECK_NAME = "KotobaLoop-Vocabulary"
 LEGACY_VOCAB_NOTE_TYPE = "MyJapaneseVocabulary"
 VOCAB_NOTE_TYPE_V2 = "MyJapaneseVocabularyV2"
 VOCAB_NOTE_TYPE_V3 = "MyJapaneseVocabularyV3"
 VOCAB_NOTE_TYPE = LEGACY_VOCAB_NOTE_TYPE
-VOCAB_TAG = "kanji-vocab-miner"
+VOCAB_TAG = "kotoba-loop"
 
 FIELDS = {
     "front": "Front",

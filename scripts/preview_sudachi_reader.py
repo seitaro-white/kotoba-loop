@@ -10,8 +10,8 @@ from html import escape
 from importlib.metadata import version
 from pathlib import Path
 
-from kanji_vocab_miner.article_reader import analyze_article
-from kanji_vocab_miner.web import create_app
+from kotoba_loop.article_reader import analyze_article
+from kotoba_loop.web import create_app
 
 ROOT = Path(__file__).resolve().parents[1]
 CORPUS = ROOT / "tests/fixtures/reader_annotation_draft.json"
@@ -38,7 +38,7 @@ def render_native_preview(corpus: dict) -> str:
         raise RuntimeError("Could not render the offline Sudachi preview")
     html = response.get_data(as_text=True)
     # Embed trusted local assets so the generated file works without a server.
-    assets = ROOT / "kanji_vocab_miner/static"
+    assets = ROOT / "kotoba_loop/static"
     css = (assets / "article_reader.css").read_text(encoding="utf-8")
     javascript = (assets / "article_reader.js").read_text(encoding="utf-8")
     html = html.replace(

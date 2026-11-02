@@ -4,7 +4,7 @@ from unittest.mock import MagicMock, call, patch
 
 import pytest
 
-from kanji_vocab_miner import jisho
+from kotoba_loop import jisho
 
 
 def _make_furigana_response(characters: str, furigana: list[str]) -> MagicMock:
@@ -26,7 +26,7 @@ def test_word_search_encodes_query_and_returns_response_json() -> None:
     response = MagicMock()
     response.json.return_value = payload
 
-    with patch("kanji_vocab_miner.jisho.requests.get", return_value=response) as get:
+    with patch("kotoba_loop.jisho.requests.get", return_value=response) as get:
         result = jisho.fetch_jisho_word_search("山")
 
     assert result == payload
@@ -55,7 +55,7 @@ def test_search_returns_matching_words_with_at_most_three_senses() -> None:
     response = MagicMock()
     response.json.return_value = payload
 
-    with patch("kanji_vocab_miner.jisho.requests.get", return_value=response):
+    with patch("kotoba_loop.jisho.requests.get", return_value=response):
         words = jisho.search_words_containing_kanji("山")
 
     assert words == [
@@ -90,7 +90,7 @@ def test_search_finds_kanji_spelling_after_kana_only_form() -> None:
         ]
     }
 
-    with patch("kanji_vocab_miner.jisho.requests.get", return_value=response):
+    with patch("kotoba_loop.jisho.requests.get", return_value=response):
         words = jisho.search_words_containing_kanji("眼")
 
     assert words == [
@@ -153,7 +153,7 @@ def test_search_selects_first_matching_form_per_entry(
     response = MagicMock()
     response.json.return_value = {"data": [{"japanese": forms}]}
 
-    with patch("kanji_vocab_miner.jisho.requests.get", return_value=response):
+    with patch("kotoba_loop.jisho.requests.get", return_value=response):
         words = jisho.search_words_containing_kanji(kanji)
 
     assert [(word.expression, word.kana) for word in words] == [expected]
@@ -179,7 +179,7 @@ def test_search_skips_entries_without_matching_forms(item: dict[str, object]) ->
     response = MagicMock()
     response.json.return_value = {"data": [item]}
 
-    with patch("kanji_vocab_miner.jisho.requests.get", return_value=response):
+    with patch("kotoba_loop.jisho.requests.get", return_value=response):
         words = jisho.search_words_containing_kanji("眼")
 
     assert words == []
@@ -202,7 +202,7 @@ def test_furigana_preserves_requested_spelling_from_other_forms(
         Path(__file__).parent / "fixtures" / "jisho_megane.html"
     ).read_text(encoding="utf-8")
 
-    with patch("kanji_vocab_miner.jisho.requests.get", return_value=response):
+    with patch("kotoba_loop.jisho.requests.get", return_value=response):
         result = jisho.fetch_jisho_word_furigana("眼鏡", reviewed_kanji)
 
     assert result == expected
@@ -221,7 +221,7 @@ def test_missing_word_page_uses_exact_search_other_form(
         status_code=200,
         text=(Path(__file__).parent / "fixtures" / fixture).read_text(encoding="utf-8"),
     )
-    with patch("kanji_vocab_miner.jisho.requests.get", side_effect=[missing, search]) as get:
+    with patch("kotoba_loop.jisho.requests.get", side_effect=[missing, search]) as get:
         front = jisho.fetch_jisho_word_furigana(word, reviewed)
 
     css = ' class="known"' if reviewed else ""
@@ -246,7 +246,7 @@ def test_search_checks_readings_across_all_matching_concepts(second_reading: str
         status_code=200,
         text=_search_concept("善く", "よく") + _search_concept("善く", second_reading),
     )
-    with patch("kanji_vocab_miner.jisho.requests.get", side_effect=[missing, search]):
+    with patch("kotoba_loop.jisho.requests.get", side_effect=[missing, search]):
         if second_reading == "よく":
             assert jisho.fetch_jisho_word_furigana("善く", set()) == (
                 "<ruby>善<rt>よ</rt></ruby>く"
@@ -261,7 +261,7 @@ def test_search_http_failure_reports_requested_word() -> None:
     search = MagicMock(status_code=503)
     search.raise_for_status.side_effect = jisho.requests.HTTPError("503 Unavailable")
     with (
-        patch("kanji_vocab_miner.jisho.requests.get", side_effect=[missing, search]),
+        patch("kotoba_loop.jisho.requests.get", side_effect=[missing, search]),
         pytest.raises(jisho.requests.RequestException, match="善く.*503"),
     ):
         jisho.fetch_jisho_word_furigana("善く", set())
@@ -273,7 +273,7 @@ def test_word_page_does_not_borrow_other_forms_from_another_concept() -> None:
         text=_search_concept("別物", "べつもの") + _search_concept("善く", "よく"),
     )
     with (
-        patch("kanji_vocab_miner.jisho.requests.get", return_value=response),
+        patch("kotoba_loop.jisho.requests.get", return_value=response),
         pytest.raises(ValueError, match="lists no reading for the requested spelling"),
     ):
         jisho.fetch_jisho_word_furigana("善く", set())
@@ -283,7 +283,7 @@ def test_search_skips_unrelated_results_and_requires_exact_spelling() -> None:
     missing = MagicMock(status_code=404)
     search = MagicMock(status_code=200, text=_search_concept("善くする", "よくする"))
     with (
-        patch("kanji_vocab_miner.jisho.requests.get", side_effect=[missing, search]),
+        patch("kotoba_loop.jisho.requests.get", side_effect=[missing, search]),
         pytest.raises(ValueError, match="no reading for the exact spelling '善く'"),
     ):
         jisho.fetch_jisho_word_furigana("善く", set())
@@ -294,7 +294,7 @@ def test_furigana_does_not_search_after_other_http_errors(status: int) -> None:
     response = MagicMock(status_code=status)
     response.raise_for_status.side_effect = jisho.requests.HTTPError(str(status))
     with (
-        patch("kanji_vocab_miner.jisho.requests.get", return_value=response) as get,
+        patch("kotoba_loop.jisho.requests.get", return_value=response) as get,
         pytest.raises(jisho.requests.RequestException, match="善く"),
     ):
         jisho.fetch_jisho_word_furigana("善く", set())
@@ -306,7 +306,7 @@ def test_furigana_reports_http_failure_with_requested_word() -> None:
     response.raise_for_status.side_effect = jisho.requests.HTTPError("404 Not Found")
 
     with (
-        patch("kanji_vocab_miner.jisho.requests.get", return_value=response),
+        patch("kotoba_loop.jisho.requests.get", return_value=response),
         pytest.raises(
             jisho.requests.RequestException,
             match="Failed to fetch furigana for '眼鏡'",
@@ -322,7 +322,7 @@ def test_furigana_reports_missing_word_representation(html: str) -> None:
     response = MagicMock(text=html)
 
     with (
-        patch("kanji_vocab_miner.jisho.requests.get", return_value=response),
+        patch("kotoba_loop.jisho.requests.get", return_value=response),
         pytest.raises(ValueError, match="no word representation for '眼鏡'"),
     ):
         jisho.fetch_jisho_word_furigana("眼鏡", set())
@@ -337,7 +337,7 @@ def test_furigana_does_not_substitute_an_unrelated_spelling() -> None:
     """
 
     with (
-        patch("kanji_vocab_miner.jisho.requests.get", return_value=response),
+        patch("kotoba_loop.jisho.requests.get", return_value=response),
         pytest.raises(ValueError, match="lists no reading for the requested spelling"),
     ):
         jisho.fetch_jisho_word_furigana("眼鏡", set())
@@ -425,7 +425,7 @@ def test_furigana_does_not_substitute_an_unrelated_spelling() -> None:
 )
 def test_furigana_known_kanji_markup(characters, furigana, reviewed_kanji, expected):
     """Test that fetch_jisho_word_furigana applies class="known" exactly to reviewed kanji."""
-    with patch("kanji_vocab_miner.jisho.requests.get", return_value=_make_furigana_response(characters, furigana)):
+    with patch("kotoba_loop.jisho.requests.get", return_value=_make_furigana_response(characters, furigana)):
         result = jisho.fetch_jisho_word_furigana(characters, reviewed_kanji)
     assert result == expected
 
@@ -485,7 +485,7 @@ def test_fetch_kanji_summary_returns_meanings_readings_and_jlpt() -> None:
     response = MagicMock()
     response.text = html
 
-    with patch("kanji_vocab_miner.jisho.requests.get", return_value=response):
+    with patch("kotoba_loop.jisho.requests.get", return_value=response):
         summary = jisho.fetch_kanji_summary("山")
 
     assert summary == jisho.KanjiSummary(

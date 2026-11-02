@@ -2,13 +2,13 @@
 
 from typing import List, Tuple
 
-from kanji_vocab_miner.anki import connect, model_setup
-from kanji_vocab_miner.anki.note_types import VOCAB_DECK_NAME, VOCAB_NOTE_TYPE_V3
-from kanji_vocab_miner.config import (
+from kotoba_loop.anki import connect, model_setup
+from kotoba_loop.anki.note_types import VOCAB_DECK_NAME, VOCAB_NOTE_TYPE_V3
+from kotoba_loop.config import (
     load_config,
     provision_default_prompt,
 )
-from kanji_vocab_miner.render import console
+from kotoba_loop.render import console
 
 
 def validate_prerequisites() -> Tuple[bool, List[str]]:
@@ -44,7 +44,7 @@ def validate_prerequisites() -> Tuple[bool, List[str]]:
         if VOCAB_DECK_NAME not in deck_names:
             errors.append(
                 f"[red]✗ Vocabulary deck '{VOCAB_DECK_NAME}' not found[/red]\n"
-                f"  Run: [bold cyan]kanji-vocab-miner setup[/bold cyan] to create it"
+                f"  Run: [bold cyan]kotoba-loop setup[/bold cyan] to create it"
             )
     except Exception:
         errors.append("[red]✗ Failed to check for vocabulary deck[/red]")
@@ -55,7 +55,7 @@ def validate_prerequisites() -> Tuple[bool, List[str]]:
         if VOCAB_NOTE_TYPE_V3 not in model_names:
             errors.append(
                 f"[red]✗ Note type '{VOCAB_NOTE_TYPE_V3}' not found[/red]\n"
-                f"  Run: [bold cyan]kanji-vocab-miner setup[/bold cyan] to create it"
+                f"  Run: [bold cyan]kotoba-loop setup[/bold cyan] to create it"
             )
     except Exception:
         errors.append("[red]✗ Failed to check for note type[/red]")
@@ -68,7 +68,7 @@ def validate_prerequisites() -> Tuple[bool, List[str]]:
                 f"[red]✗ Kanji deck '{kanji_deck_name}' not found[/red]\n"
                 f"  This deck is required for the tool to work.\n"
                 f"  Download from: https://ankiweb.net/shared/info/1862058740\n"
-                f"  Or configure a different kanji deck in: ~/.config/kanji-vocab-miner/config.toml"
+                f"  Or configure a different kanji deck in: ~/.config/kotoba-loop/config.toml"
             )
     except Exception:
         errors.append("[red]✗ Failed to check for kanji deck[/red]")
@@ -88,7 +88,7 @@ def run_setup() -> bool:
         True when deck and V3 setup succeed, or False after a provisioning or
         service failure. A missing kanji deck produces guidance, not failure.
     """
-    console.print("[bold]Kanji Vocab Miner Setup[/bold]\n")
+    console.print("[bold]Kotoba Loop Setup[/bold]\n")
 
     config = load_config()
     try:
@@ -164,11 +164,11 @@ def run_setup() -> bool:
             "[yellow]⚠ Important:[/yellow] You also need the kanji deck to use this tool.\n"
             f"  The tool expects: [bold]{kanji_deck_name}[/bold]\n"
             "  Download from: https://ankiweb.net/shared/info/1862058740\n"
-            "  Import it into Anki before running [bold cyan]kanji-vocab-miner[/bold cyan]\n"
+            "  Import it into Anki before running [bold cyan]kotoba-loop[/bold cyan]\n"
         )
     else:
         console.print(
-            "You can now run [bold cyan]kanji-vocab-miner[/bold cyan] to start using the tool.\n"
+            "You can now run [bold cyan]kotoba-loop[/bold cyan] to start using the tool.\n"
         )
 
     return True

@@ -11,8 +11,8 @@ from typing import Any, Callable, List, Optional, Protocol
 from pydantic import BaseModel, ConfigDict, field_validator, model_validator
 import requests
 
-from kanji_vocab_miner.jisho import JishoWord
-from kanji_vocab_miner.vocab_models import PendingVocabItem
+from kotoba_loop.jisho import JishoWord
+from kotoba_loop.vocab_models import PendingVocabItem
 
 DEEPSEEK_RESPONSES_ENDPOINT = "https://api.deepseek.com/responses"
 DEEPSEEK_MODEL = "deepseek-flash"

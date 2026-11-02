@@ -4,8 +4,8 @@ from unittest.mock import Mock
 
 import pytest
 
-from kanji_vocab_miner.anki import connect
-from kanji_vocab_miner.anki.furigana_sync import (
+from kotoba_loop.anki import connect
+from kotoba_loop.anki.furigana_sync import (
     FuriganaChange,
     _update_stored_furigana,
     sync_vocab_furigana,
@@ -109,7 +109,7 @@ def test_sync_migrates_compatible_models_by_note_id(
 
     assert sync_vocab_furigana() == 2
     assert send.call_args_list[0].kwargs == {
-        "query": 'deck:"KanjiVocabMiner-Vocabulary"'
+        "query": 'deck:"KotobaLoop-Vocabulary"'
     }
     assert send.call_args_list[1].kwargs == {"notes": [10, 20, 30, 40]}
     assert [call.kwargs["note"] for call in send.call_args_list[2:]] == [

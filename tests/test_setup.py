@@ -4,30 +4,30 @@ from unittest.mock import patch
 
 import pytest
 
-from kanji_vocab_miner.anki.note_types import (
+from kotoba_loop.anki.note_types import (
     VOCAB_NOTE_TYPE_V2,
     VOCAB_NOTE_TYPE_V3,
     VOCAB_V2_FIELDS,
     VOCAB_V3_FIELDS,
 )
-from kanji_vocab_miner.config import AppConfig
-from kanji_vocab_miner.setup import run_setup, validate_prerequisites
+from kotoba_loop.config import AppConfig
+from kotoba_loop.setup import run_setup, validate_prerequisites
 
 
 @pytest.fixture
 def setup_config(tmp_path):
     """Run real prompt provisioning inside the test's configuration directory."""
     config = AppConfig(llm={"prompt_path": tmp_path / "prompt.md"})
-    with patch("kanji_vocab_miner.setup.load_config", return_value=config):
+    with patch("kotoba_loop.setup.load_config", return_value=config):
         yield config
 
 
 def test_prerequisites_require_v3_but_not_older_models() -> None:
     """Production startup requires V3, independently of legacy and V2."""
-    deck_names = ["KanjiVocabMiner-Vocabulary", "All in One Kanji"]
+    deck_names = ["KotobaLoop-Vocabulary", "All in One Kanji"]
     with (
-        patch("kanji_vocab_miner.setup.load_config", return_value=AppConfig()),
-        patch("kanji_vocab_miner.setup.connect.send_request") as send_request,
+        patch("kotoba_loop.setup.load_config", return_value=AppConfig()),
+        patch("kotoba_loop.setup.connect.send_request") as send_request,
     ):
         send_request.side_effect = [6, deck_names, [VOCAB_NOTE_TYPE_V2], deck_names]
         is_valid, errors = validate_prerequisites()
@@ -41,8 +41,8 @@ def test_prerequisites_require_v3_but_not_older_models() -> None:
 
 def test_setup_installs_prompt_even_when_anki_is_unavailable(setup_config) -> None:
     with (
-        patch("kanji_vocab_miner.setup.connect.send_request") as send_request,
-        patch("kanji_vocab_miner.setup.console.print"),
+        patch("kotoba_loop.setup.connect.send_request") as send_request,
+        patch("kotoba_loop.setup.console.print"),
     ):
         send_request.side_effect = RuntimeError("Anki is unavailable")
         result = run_setup()
@@ -57,8 +57,8 @@ def test_setup_installs_prompt_even_when_anki_is_unavailable(setup_config) -> No
 def test_run_setup_creates_only_v3_model_on_a_fresh_install(setup_config) -> None:
     """Fresh setup creates V3 without mutating older models."""
     with (
-        patch("kanji_vocab_miner.setup.connect.send_request") as send_request,
-        patch("kanji_vocab_miner.setup.console.print"),
+        patch("kotoba_loop.setup.connect.send_request") as send_request,
+        patch("kotoba_loop.setup.console.print"),
     ):
         send_request.side_effect = [6, 123, [], 456, ["All in One Kanji"]]
         assert run_setup() is True
@@ -74,8 +74,8 @@ def test_run_setup_creates_only_v3_model_on_a_fresh_install(setup_config) -> Non
 def test_run_setup_updates_existing_v3_model(setup_config) -> None:
     """Setup validates and refreshes an installed V3 model only."""
     with (
-        patch("kanji_vocab_miner.setup.connect.send_request") as send_request,
-        patch("kanji_vocab_miner.setup.console.print"),
+        patch("kotoba_loop.setup.connect.send_request") as send_request,
+        patch("kotoba_loop.setup.console.print"),
     ):
         send_request.side_effect = [
             6, 123, [VOCAB_NOTE_TYPE_V2, VOCAB_NOTE_TYPE_V3],
@@ -98,8 +98,8 @@ def test_run_setup_updates_existing_v3_model(setup_config) -> None:
 
 def test_setup_refuses_to_refresh_incompatible_v3(setup_config) -> None:
     with (
-        patch("kanji_vocab_miner.setup.connect.send_request") as send_request,
-        patch("kanji_vocab_miner.setup.console.print"),
+        patch("kotoba_loop.setup.connect.send_request") as send_request,
+        patch("kotoba_loop.setup.console.print"),
     ):
         send_request.side_effect = [6, 123, [VOCAB_NOTE_TYPE_V3], ["Front", "Back"]]
         assert run_setup() is False

@@ -1,7 +1,7 @@
 """Tests for vocabulary commit state and outcomes."""
 
-from kanji_vocab_miner.jisho import JishoWord
-from kanji_vocab_miner.vocab_models import (
+from kotoba_loop.jisho import JishoWord
+from kotoba_loop.vocab_models import (
     AddFailure,
     PendingVocabItem,
 )

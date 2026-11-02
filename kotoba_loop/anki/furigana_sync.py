@@ -3,10 +3,10 @@
 import re
 from dataclasses import dataclass
 
-from kanji_vocab_miner.anki import connect
-from kanji_vocab_miner.anki.note_types import VOCAB_DECK_NAME
-from kanji_vocab_miner.anki.schemas import VocabNoteFurigana
-from kanji_vocab_miner.furigana import update_furigana_visibility
+from kotoba_loop.anki import connect
+from kotoba_loop.anki.note_types import VOCAB_DECK_NAME
+from kotoba_loop.anki.schemas import VocabNoteFurigana
+from kotoba_loop.furigana import update_furigana_visibility
 
 
 @dataclass(frozen=True)

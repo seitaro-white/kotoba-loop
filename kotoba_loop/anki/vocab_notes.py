@@ -3,14 +3,14 @@
 from html import escape
 from typing import Any
 
-from kanji_vocab_miner.anki.note_types import (
+from kotoba_loop.anki.note_types import (
     VOCAB_NOTE_TYPE_V3,
     VOCAB_TAG,
     VOCAB_V3_FIELDS,
 )
-from kanji_vocab_miner.enrichment import VocabEnrichment, render_example
-from kanji_vocab_miner.kotobank import JapaneseDefinition
-from kanji_vocab_miner.vocab_models import PendingVocabItem
+from kotoba_loop.enrichment import VocabEnrichment, render_example
+from kotoba_loop.kotobank import JapaneseDefinition
+from kotoba_loop.vocab_models import PendingVocabItem
 
 
 def _render_plain_text(value: str) -> str:

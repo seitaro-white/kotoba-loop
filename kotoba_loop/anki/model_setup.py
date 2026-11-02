@@ -1,7 +1,7 @@
 """Serialize note-type definitions for creation and safe Anki model refresh."""
 
-from kanji_vocab_miner.anki import connect
-from kanji_vocab_miner.anki.note_types import (
+from kotoba_loop.anki import connect
+from kotoba_loop.anki.note_types import (
     NoteTypeDefinition,
     vocab_note_type_v2,
     vocab_note_type_v3,

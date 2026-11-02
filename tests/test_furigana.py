@@ -5,7 +5,7 @@ from html import unescape
 
 import pytest
 
-from kanji_vocab_miner.furigana import (
+from kotoba_loop.furigana import (
     render_japanese_cue,
     render_token_furigana,
     update_furigana_visibility,

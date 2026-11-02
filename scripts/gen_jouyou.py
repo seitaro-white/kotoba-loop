@@ -1,4 +1,4 @@
-"""Regenerate kanji_vocab_miner/jouyou_data.py from KanjiDic2.
+"""Regenerate kotoba_loop/jouyou_data.py from KanjiDic2.
 
 KanjiDic2 (bundled with jamdict) records a `grade` for each kanji:
   1-6 = kyouiku kanji by elementary school grade (1026 total)
@@ -20,7 +20,7 @@ GRADE_MAP: dict[int, int | str] = {1: 1, 2: 2, 3: 3, 4: 4, 5: 5, 6: 6, 8: "secon
 
 OUT_PATH = os.path.join(
     os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
-    "kanji_vocab_miner",
+    "kotoba_loop",
     "jouyou_data.py",
 )
 

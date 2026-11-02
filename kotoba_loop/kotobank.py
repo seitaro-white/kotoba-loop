@@ -71,7 +71,7 @@ class KotobankClient:
         self.timeout = timeout
         self.sleep = sleep
         self.session.headers.update(
-            {"User-Agent": "kanji-vocab-miner/0.1 Kotobank personal-use lookup"}
+            {"User-Agent": "kotoba-loop/0.1 Kotobank personal-use lookup"}
         )
 
     def lookup(

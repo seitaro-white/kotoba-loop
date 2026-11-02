@@ -10,13 +10,13 @@ These are real integration tests that interact with Anki.
 
 import pytest
 
-from kanji_vocab_miner.anki import connect
+from kotoba_loop.anki import connect
 
 pytestmark = pytest.mark.integration
 
 
 # Test deck/note type names (use unique names to avoid conflicts)
-TEST_DECK_NAME = "KanjiVocabMiner-TestDeck-DELETE-ME"
+TEST_DECK_NAME = "KotobaLoop-TestDeck-DELETE-ME"
 
 
 @pytest.fixture(scope="module")

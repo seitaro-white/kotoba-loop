@@ -4,8 +4,8 @@ import sqlite3
 
 import pytest
 
-from kanji_vocab_miner import frequency
-from kanji_vocab_miner.frequency import BandWord
+from kotoba_loop import frequency
+from kotoba_loop.frequency import BandWord
 
 
 @pytest.fixture

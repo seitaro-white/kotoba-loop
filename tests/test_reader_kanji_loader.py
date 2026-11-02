@@ -5,8 +5,8 @@ from types import SimpleNamespace
 import pytest
 import requests
 
-from kanji_vocab_miner import config
-from kanji_vocab_miner.anki import connect
+from kotoba_loop import config
+from kotoba_loop.anki import connect
 
 
 def test_reader_can_request_strict_kanji_loading(

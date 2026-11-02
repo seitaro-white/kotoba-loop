@@ -7,9 +7,9 @@ from pathlib import Path
 import pytest
 from bs4 import BeautifulSoup
 
-from kanji_vocab_miner.article_reader import analyze_article
-from kanji_vocab_miner.article_render import render_article_html
-from kanji_vocab_miner.web import create_demo_app
+from kotoba_loop.article_reader import analyze_article
+from kotoba_loop.article_render import render_article_html
+from kotoba_loop.web import create_demo_app
 
 
 @pytest.mark.parametrize("target_level", [5, 4, 3, 2, 1])
@@ -35,7 +35,7 @@ def test_target_level_visibility_matrix(
         f'data-target-level="{target_level}">{html}</article>',
         "html.parser",
     )
-    css_path = Path(__file__).resolve().parents[1] / "kanji_vocab_miner/static/article_reader.css"
+    css_path = Path(__file__).resolve().parents[1] / "kotoba_loop/static/article_reader.css"
     css = re.sub(r"/\*.*?\*/", "", css_path.read_text(), flags=re.DOTALL)
     # Evaluate the real stylesheet selectors in cascade order, rather than
     # duplicating its list of harder levels in a test-only implementation.

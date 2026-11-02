@@ -7,7 +7,7 @@ from jamdict import Jamdict
 from prompt_toolkit import prompt as pt_prompt
 from prompt_toolkit.formatted_text import HTML
 
-from kanji_vocab_miner import (
+from kotoba_loop import (
     card_processor,
     frequency,
     jisho,
@@ -19,14 +19,14 @@ from kanji_vocab_miner import (
     review,
     vocab_commit,
 )
-from kanji_vocab_miner.anki import connect as ankiconnect
-from kanji_vocab_miner.anki.furigana_sync import sync_vocab_furigana
-from kanji_vocab_miner.anki.schemas import KanjiCard
-from kanji_vocab_miner.jisho import JishoWord
-from kanji_vocab_miner.render import console, error, info, success
-from kanji_vocab_miner.review_status import KanjiReviewStatus
-from kanji_vocab_miner.utils import is_kanji, is_kotoba, parse_integer_selection
-from kanji_vocab_miner.vocab_models import (
+from kotoba_loop.anki import connect as ankiconnect
+from kotoba_loop.anki.furigana_sync import sync_vocab_furigana
+from kotoba_loop.anki.schemas import KanjiCard
+from kotoba_loop.jisho import JishoWord
+from kotoba_loop.render import console, error, info, success
+from kotoba_loop.review_status import KanjiReviewStatus
+from kotoba_loop.utils import is_kanji, is_kotoba, parse_integer_selection
+from kotoba_loop.vocab_models import (
     BatchAddResult,
     PendingVocabItem,
 )
@@ -303,7 +303,7 @@ def jisho_anki(ctx):
 @jisho_anki.command()
 def setup():
     """Initialize vocabulary deck and note type in Anki."""
-    from kanji_vocab_miner.setup import run_setup
+    from kotoba_loop.setup import run_setup
 
     success = run_setup()
     sys.exit(0 if success else 1)
@@ -312,7 +312,7 @@ def setup():
 @jisho_anki.command(name="web")
 def run_web() -> None:
     """Start the localhost furigana article reader."""
-    from kanji_vocab_miner.web import create_app
+    from kotoba_loop.web import create_app
 
     create_app().run(host="127.0.0.1", port=8766, debug=False)
 
@@ -403,7 +403,7 @@ def run_interactive():
     render.welcome_message()
 
     # Validate prerequisites before starting
-    from kanji_vocab_miner.setup import validate_prerequisites
+    from kotoba_loop.setup import validate_prerequisites
 
     is_valid, errors = validate_prerequisites()
     if not is_valid:

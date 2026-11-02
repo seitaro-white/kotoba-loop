@@ -7,15 +7,15 @@ import threading
 import pytest
 import requests
 
-from kanji_vocab_miner.enrichment import (
+from kotoba_loop.enrichment import (
     DeepSeekEnrichmentClient,
     EnrichmentError,
     VocabEnrichment,
     generate_enrichments,
     render_example,
 )
-from kanji_vocab_miner.jisho import JishoWord
-from kanji_vocab_miner.vocab_models import PendingVocabItem
+from kotoba_loop.jisho import JishoWord
+from kotoba_loop.vocab_models import PendingVocabItem
 
 
 class FakeResponse:

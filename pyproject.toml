@@ -1,7 +1,7 @@
 [project]
-name = "kanji-vocab-miner"
+name = "kotoba-loop"
 version = "0.1.0"
-description = "CLI tool for mining Japanese vocabulary in Anki using kanji from your deck and word lookups from Jisho"
+description = "Toolkit for learning Japanese with vocabulary mining, Anki integration and adaptive furigana"
 authors = [
     {name = "Joseph White", email = "joseph@example.com"}
 ]
@@ -45,19 +45,19 @@ dependencies = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/seitaro-white/kanji-vocab-builder"
-Repository = "https://github.com/seitaro-white/kanji-vocab-builder"
-Issues = "https://github.com/seitaro-white/kanji-vocab-builder/issues"
+Homepage = "https://github.com/seitaro-white/kotoba-loop"
+Repository = "https://github.com/seitaro-white/kotoba-loop"
+Issues = "https://github.com/seitaro-white/kotoba-loop/issues"
 
 [project.scripts]
-kanji-vocab-miner = "kanji_vocab_miner.cli:jisho_anki"
+kotoba-loop = "kotoba_loop.cli:jisho_anki"
 
 [build-system]
 requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [tool.hatch.build.targets.wheel]
-packages = ["kanji_vocab_miner"]
+packages = ["kotoba_loop"]
 
 [tool.pytest.ini_options]
 markers = [

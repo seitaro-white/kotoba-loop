@@ -5,13 +5,13 @@ import unicodedata
 from dataclasses import dataclass
 from functools import lru_cache
 
-from kanji_vocab_miner.furigana import _KANJI_RE, _to_hiragana
-from kanji_vocab_miner.japanese_tokenizer import (
+from kotoba_loop.furigana import _KANJI_RE, _to_hiragana
+from kotoba_loop.japanese_tokenizer import (
     JapaneseToken,
     PartOfSpeech,
     tokenize_japanese,
 )
-from kanji_vocab_miner.jlpt import get_level_index
+from kotoba_loop.jlpt import get_level_index
 
 _EXCLUDED_VOCABULARY_PARTS = {
     "助詞",      # Particles, e.g. は and を.

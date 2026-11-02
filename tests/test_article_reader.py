@@ -6,14 +6,14 @@ from html import unescape
 import pytest
 from bs4 import BeautifulSoup
 
-from kanji_vocab_miner.article_reader import (
+from kotoba_loop.article_reader import (
     ArticleToken,
     JlptVocabularyGroup,
     VocabularyCount,
     analyze_article,
     build_unknown_vocabulary_summary,
 )
-from kanji_vocab_miner.article_render import render_article_html
+from kotoba_loop.article_render import render_article_html
 
 
 def _visible_text(rendered: str) -> str:
