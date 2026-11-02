@@ -1,6 +1,6 @@
 # Progress dashboard
 
-Run `kanji-vocab-miner stats` to show your Kanji, Reading, Grammar, and
+Run `kotoba-loop stats` to show your Kanji, Reading, Grammar, and
 vocabulary progress. Overall bars appear together at the top, followed by
 Kanji and textbook-part breakdowns. Vocabulary is measured against a core
 6,000-word target: the tool adds every vocabulary note created on or after the
@@ -8,7 +8,7 @@ configured tracking date to the manually estimated baseline.
 
 For now, the file is read from the directory where you run the command. When
 working from this repository, edit the included `manual_progress.toml` and run
-`uv run kanji-vocab-miner stats` from the repository root.
+`uv run kotoba-loop stats` from the repository root.
 
 The file contains:
 

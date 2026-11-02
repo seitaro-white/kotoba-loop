@@ -45,9 +45,9 @@ dependencies = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/yourusername/kanji-vocab-miner"
-Repository = "https://github.com/yourusername/kanji-vocab-miner"
-Issues = "https://github.com/yourusername/kanji-vocab-miner/issues"
+Homepage = "https://github.com/seitaro-white/kanji-vocab-builder"
+Repository = "https://github.com/seitaro-white/kanji-vocab-builder"
+Issues = "https://github.com/seitaro-white/kanji-vocab-builder/issues"
 
 [project.scripts]
 kanji-vocab-miner = "kanji_vocab_miner.cli:jisho_anki"

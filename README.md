@@ -31,21 +31,23 @@ Using this tool requires some Anki setup:
 3. **"All in One Kanji" Deck** - Download from [AnkiWeb](https://ankiweb.net/shared/info/1862058740)
    - This is the recommended kanji deck that the tool expects by default.
    - File → Import → Browse to downloaded `.apkg` file
-   - The tool will re-order existing cards from this deck for kanji study, while creating entirely
+   - The tool will re-order existing cards from this deck for kanji study, while creating new vocabulary cards in a separate deck, `KanjiVocabMiner-Vocabulary`.
+   - The kanji deck name can be changed with `[kanji_deck] name` in `~/.config/kanji-vocab-miner/config.toml` (see [sample-config.toml](sample-config.toml)).
 
 Once this is done (and Anki is running with AnkiConnect enabled), install the tool with [uv](https://docs.astral.sh/uv/):
 
 ```bash
-uv tool install git+https://github.com/yourusername/kanji-vocab-miner.git
+uv tool install git+https://github.com/seitaro-white/kanji-vocab-builder.git
 kanji-vocab-miner setup
 ```
 
-This installs `kanji-vocab-miner` globally so you can run it from any directory. If you don't have uv installed, follow the [uv installation guide](https://docs.astral.sh/uv/getting-started/installation/).
+`setup` creates the `KanjiVocabMiner-Vocabulary` deck and the `MyJapaneseVocabularyV3` note type in Anki. This installs `kanji-vocab-miner` globally so you can run it from any directory. If you don't have uv installed, follow the [uv installation guide](https://docs.astral.sh/uv/getting-started/installation/).
 
-To update to the latest version:
+To update to the latest version (re-running `setup` refreshes the Anki note type and templates):
 
 ```bash
 uv tool upgrade kanji-vocab-miner
+kanji-vocab-miner setup
 ```
 
 
@@ -58,12 +60,16 @@ Make sure Anki is running and run `kanji-vocab-miner` to start the interactive s
 **Commands:**
 - `n` - Look up the kanji on the card currently open in Anki Reviewer
 - `a` - Move the most recently looked-up kanji card to the top of its Anki deck
-- `c` - Commit selected words to Anki
+- `c` - Review pending words (toggle which to add, and whether to create a recall card for each), then commit them to Anki
 - `q` - Quit the program
 - Type a kanji directly (e.g., `食`) - Search for words containing that kanji and show whether its Anki card has been reviewed
 - Type `@word` (e.g., `@食べる`) - Look up a specific word on Jisho
 - When in word selection mode, enter numbers or ranges (e.g., `1 3 5` or `1-5`) to select words to add
 
+
+## Japanese definitions
+
+Each new card also includes a Japanese-language definition from [Kotobank](https://kotobank.jp/), shown on the card with furigana for any kanji you haven't reviewed yet. If a definition can't be found, the word stays pending so you can retry.
 
 ## Credits
 

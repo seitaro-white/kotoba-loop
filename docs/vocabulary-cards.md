@@ -20,8 +20,8 @@ To update to the latest version, upgrade the tool and run setup again so Anki ha
 the current V3 vocabulary note type and templates:
 
 ```bash
-uv tool upgrade kanji-vocab-miner
-kanji-vocab-miner setup
+uv tool upgrade kotoba-loop
+kotoba-loop setup
 ```
 
 A [DeepSeek API key](https://platform.deepseek.com/) is required when committing
@@ -29,14 +29,14 @@ new vocabulary, but not for setup, searching, or reviewing pending words. Export
 it in the environment used to launch the tool:
 
 ```bash
-export KANJI_VOCAB_MINER_LLM__API_KEY="your-api-key"
+export KOTOBA_LOOP_LLM__API_KEY="your-api-key"
 ```
 
 The key is environment-only. **Do not put it in `config.toml`.**
 
-Run `kanji-vocab-miner setup` after installing or upgrading. Setup creates or
+Run `kotoba-loop setup` after installing or upgrading. Setup creates or
 safely refreshes the required `MyJapaneseVocabularyV3` note type in the existing
-`KanjiVocabMiner-Vocabulary` deck. It does not migrate or regenerate existing
+`KotobaLoop-Vocabulary` deck. It does not migrate or regenerate existing
 cards. Legacy `MyJapaneseVocabulary` and `MyJapaneseVocabularyV2` notes remain
 unchanged in the deck.
 
@@ -99,18 +99,18 @@ previously generated cards until empty cards are removed.
 ## DeepSeek enrichment settings
 
 Setup creates the default editable prompt at
-`~/.config/kanji-vocab-miner/enrichment-prompt.md` only when that file is
+`~/.config/kotoba-loop/enrichment-prompt.md` only when that file is
 absent. Existing prompt edits are never overwritten. Edit this file to change
 content guidance for nuance, examples, and kanji explanations. The application
 owns the structured response schema, validation, and safe example highlighting;
 the editable prompt does not replace that fixed contract.
 
 The prompt path and request concurrency are the only LLM settings in
-`~/.config/kanji-vocab-miner/config.toml`:
+`~/.config/kotoba-loop/config.toml`:
 
 ```toml
 [llm]
-prompt_path = "~/.config/kanji-vocab-miner/enrichment-prompt.md"
+prompt_path = "~/.config/kotoba-loop/enrichment-prompt.md"
 concurrency = 5
 ```
 
@@ -120,9 +120,9 @@ Set it in the process environment, or put the following in a `.env` file in the
 current working directory (the repository `.gitignore` excludes this file):
 
 ```dotenv
-KANJI_VOCAB_MINER_LLM__API_KEY="your-api-key"
+KOTOBA_LOOP_LLM__API_KEY="your-api-key"
 ```
 
 An explicitly exported environment variable takes precedence over `.env`. When
-running `uv run kanji-vocab-miner` from the repository root, the local `.env`
+running `uv run kotoba-loop` from the repository root, the local `.env`
 file is loaded automatically.

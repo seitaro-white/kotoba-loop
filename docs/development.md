@@ -2,7 +2,7 @@
 
 ## Anki implementation boundaries
 
-Within `kanji_vocab_miner/anki/`, `connect.py` owns HTTP and collection access;
+Within `kotoba_loop/anki/`, `connect.py` owns HTTP and collection access;
 its supported legacy add helpers remain unchanged. `note_types.py` owns stable
 legacy/V2/V3 field order, model names, templates and CSS. `model_setup.py` creates
 models or refreshes only templates/CSS after validating exact field order;

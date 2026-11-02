@@ -1,8 +1,5 @@
 # Furigana article reader
 
-The visual refresh and verification status are tracked in the
-[frontend polish plan](docs/reader-frontend-plan.md).
-
 Start the localhost-only web reader with Anki Desktop and AnkiConnect running:
 
 ```bash
