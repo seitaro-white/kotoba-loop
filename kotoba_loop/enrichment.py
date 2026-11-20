@@ -118,7 +118,15 @@ class DeepSeekEnrichmentClient:
 
     def generate(self, word: JishoWord) -> VocabEnrichment:
         """Generate enrichment for a word, retrying transient/invalid responses."""
-        user_prompt = self.prompt_path.read_text(encoding="utf-8").strip()
+        try:
+            user_prompt = self.prompt_path.read_text(encoding="utf-8").strip()
+        except (OSError, UnicodeError) as exc:
+            raise EnrichmentError(
+                f"Cannot read enrichment prompt at {self.prompt_path}: "
+                f"{type(exc).__name__}: {self._safe_problem(exc)}. "
+                "Run 'kotoba-loop setup' to create a missing prompt, or fix "
+                "llm.prompt_path and ensure the file is readable UTF-8 text."
+            ) from exc
         base_input = self._build_input(user_prompt, word)
         correction = ""
         last_problem = "unknown provider response"
@@ -241,10 +249,13 @@ def generate_enrichments(
                 outcome = EnrichmentOutcome(item=item, enrichment=enrichment)
             except EnrichmentError as exc:
                 outcome = EnrichmentOutcome(item=item, error=exc)
-            except Exception:
+            except Exception as exc:
                 outcome = EnrichmentOutcome(
                     item=item,
-                    error=EnrichmentError("Unexpected enrichment worker failure"),
+                    error=EnrichmentError(
+                        "Unexpected enrichment worker failure: "
+                        f"{type(exc).__name__}: {client._safe_problem(exc)}"
+                    ),
                 )
             outcomes[index] = outcome
             if on_complete is not None:

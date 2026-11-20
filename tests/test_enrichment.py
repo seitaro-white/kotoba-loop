@@ -186,6 +186,54 @@ def test_generate_accepts_top_level_output_text(tmp_path) -> None:
     assert client.generate(word()).nuance.startswith("Used when")
 
 
+def test_missing_prompt_reports_path_and_setup_guidance_without_request(tmp_path) -> None:
+    client, transport, sleeps = make_client(tmp_path, [])
+    client.prompt_path.unlink()
+
+    outcomes = generate_enrichments([PendingVocabItem(word())], client, max_workers=1)
+
+    assert outcomes[0].enrichment is None
+    message = str(outcomes[0].error)
+    assert "Cannot read enrichment prompt" in message
+    assert str(client.prompt_path) in message
+    assert "FileNotFoundError" in message
+    assert "kotoba-loop setup" in message
+    assert transport.calls == []
+    assert sleeps == []
+
+
+def test_invalid_prompt_encoding_reports_read_failure_without_request(tmp_path) -> None:
+    client, transport, _ = make_client(tmp_path, [])
+    client.prompt_path.write_bytes(b"\xff")
+
+    with pytest.raises(EnrichmentError, match="Cannot read enrichment prompt"):
+        client.generate(word())
+
+    assert transport.calls == []
+
+
+def test_unexpected_worker_failure_preserves_details_and_redacts_key(
+    tmp_path, monkeypatch
+) -> None:
+    client, transport, _ = make_client(tmp_path, [])
+
+    def fail_generate(input_word: JishoWord) -> VocabEnrichment:
+        raise RuntimeError("broken worker using top-secret")
+
+    monkeypatch.setattr(client, "generate", fail_generate)
+    item = PendingVocabItem(word())
+
+    outcomes = generate_enrichments([item], client, max_workers=1)
+
+    assert outcomes[0].item == item
+    assert outcomes[0].enrichment is None
+    assert str(outcomes[0].error) == (
+        "Unexpected enrichment worker failure: RuntimeError: "
+        "broken worker using [redacted]"
+    )
+    assert transport.calls == []
+
+
 def test_generate_enrichments_is_bounded_ordered_and_failure_isolated() -> None:
     items = [
         PendingVocabItem(

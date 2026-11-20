@@ -53,6 +53,12 @@ LLM generation of vocabulary flashcards in Anki, complete with nuance, example s
 > [!IMPORTANT]
 > Committing new vocabulary requires a DeepSeek API key. See [docs/vocabulary-cards.md](docs/vocabulary-cards.md) for setup.
 
+If enrichment reports a missing prompt, run `kotoba-loop setup` to copy the bundled
+prompt to `~/.config/kotoba-loop/enrichment-prompt.md` (or your configured
+`llm.prompt_path`) without overwriting an existing prompt. Prompt read failures
+report the path and underlying error; unexpected worker failures include sanitized
+exception details.
+
 ## Who is it for?
 
 Originally just me!
